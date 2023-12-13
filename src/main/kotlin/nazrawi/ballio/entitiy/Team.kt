@@ -5,7 +5,7 @@ import jakarta.persistence.*
 @Entity
 class Team(
     var name: String,
-    var rank: Int,
+    var ranking: Int,
     var points: Int,
     var gd: Int,
     var leagueId: Int,
@@ -15,7 +15,7 @@ class Team(
 ) {
     fun toDto() = TeamDto(
         name = name,
-        rank = rank,
+        ranking = ranking,
         points = points,
         gd = gd,
         leagueId = leagueId,
@@ -26,7 +26,7 @@ class Team(
 
 data class TeamDto(
     val name: String,
-    val rank: Int,
+    val ranking: Int,
     val points: Int,
     val gd: Int,
     val leagueId: Int,

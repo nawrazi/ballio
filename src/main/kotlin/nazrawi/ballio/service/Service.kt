@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 @Service
 class StandingsService(private val standingsRepository: StandingsRepository) {
 
-    fun getStandingsById(id: Int) = standingsRepository.findByLeagueId(id)
+    fun getStandingsByLeagueId(id: Int) = standingsRepository.findByLeagueId(id)
 
     fun updateStandings(standings: Standings): Standings {
         standingsRepository.deleteByLeagueId(standings.leagueId)

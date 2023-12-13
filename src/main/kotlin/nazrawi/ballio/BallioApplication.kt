@@ -22,13 +22,13 @@ fun main(args: Array<String>) {
 @RequestMapping("/standings")
 class StandingsController(private val standingsService: StandingsService) {
 
-	@GetMapping("/{id}")
-	fun getStandings(@PathVariable id: Int): StandingsDto {
-
-		var standings = standingsService.getStandingsById(id)
+	@GetMapping("/{slug}")
+	fun getStandings(@PathVariable slug: String): StandingsDto {
+		val league = League.getBySlug(slug)
+		var standings = standingsService.getStandingsByLeagueId(league.id)
 
 		if (standings == null || standings.isOutdated)
-			standings = standingsService.updateStandings(StandingsScraper(League.getById(id)).scrape())
+			standings = standingsService.updateStandings(StandingsScraper(league).scrape())
 
 		return standings.toDto()
 	}

@@ -16,7 +16,7 @@ import nazrawi.ballio.entitiy.Team
 
 class StandingsScraper(private val league: League) {
 
-    private val websiteUrl = "https://www.theguardian.com/football/${league.slug}/table"
+    private val websiteUrl = "https://www.theguardian.com/football/${league.sourceUri}/table"
 
     fun scrape(): Standings {
         return skrape(HttpFetcher) {
@@ -45,7 +45,7 @@ class StandingsScraper(private val league: League) {
                     val teams = names.indices.map {
                         Team(
                             name = names[it],
-                            rank = ranks[it].toInt(),
+                            ranking = ranks[it].toInt(),
                             points = points[it].toInt(),
                             gd = gds[it].toInt(),
                             crest = crests[it],
