@@ -9,6 +9,7 @@ class Team(
     var points: Int,
     var gd: Int,
     var leagueId: Int,
+    var crest: String,
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0L,
 ) {
@@ -18,6 +19,7 @@ class Team(
         points = points,
         gd = gd,
         leagueId = leagueId,
+        crest = crest,
         id = id,
     )
 }
@@ -28,5 +30,6 @@ data class TeamDto(
     val points: Int,
     val gd: Int,
     val leagueId: Int,
+    val crest: String,
     val id: Long,
 )

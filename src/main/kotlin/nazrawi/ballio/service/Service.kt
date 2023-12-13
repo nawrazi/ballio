@@ -1,17 +1,17 @@
 package nazrawi.ballio.service
 
-import nazrawi.ballio.entitiy.Table
-import nazrawi.ballio.repository.TableRepository
+import nazrawi.ballio.entitiy.Standings
+import nazrawi.ballio.repository.StandingsRepository
 import org.springframework.stereotype.Service
 
 @Service
-class TableService(private val tableRepository: TableRepository) {
+class StandingsService(private val standingsRepository: StandingsRepository) {
 
-    fun getTableById(id: Int) = tableRepository.findByLeagueId(id)
+    fun getStandingsById(id: Int) = standingsRepository.findByLeagueId(id)
 
-    fun updateTable(table: Table): Table {
-        tableRepository.deleteByLeagueId(table.leagueId)
-        return tableRepository.save(table)
+    fun updateStandings(standings: Standings): Standings {
+        standingsRepository.deleteByLeagueId(standings.leagueId)
+        return standingsRepository.save(standings)
     }
 
 }

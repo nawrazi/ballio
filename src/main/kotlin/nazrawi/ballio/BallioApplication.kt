@@ -1,9 +1,9 @@
 package nazrawi.ballio
 
 import nazrawi.ballio.entitiy.League
-import nazrawi.ballio.entitiy.TableDto
+import nazrawi.ballio.entitiy.StandingsDto
 import nazrawi.ballio.scraper.WebScraper
-import nazrawi.ballio.service.TableService
+import nazrawi.ballio.service.StandingsService
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.web.bind.annotation.GetMapping
@@ -19,18 +19,18 @@ fun main(args: Array<String>) {
 }
 
 @RestController
-@RequestMapping("/table")
-class TableController(private val tableService: TableService) {
+@RequestMapping("/standings")
+class StandingsController(private val standingsService: StandingsService) {
 
 	@GetMapping("/{id}")
-	fun getAllTeams(@PathVariable id: Int): TableDto {
+	fun getStandings(@PathVariable id: Int): StandingsDto {
 
-		var table = tableService.getTableById(id)
+		var standings = standingsService.getStandingsById(id)
 
-		if (table == null || table.isAtLeastOneDayOld)
-			table = tableService.updateTable(WebScraper(League.getById(id)).scrape())
+		if (standings == null || standings.isOutdated)
+			standings = standingsService.updateStandings(WebScraper(League.getById(id)).scrape())
 
-		return table.toDto()
+		return standings.toDto()
 	}
 
 }
