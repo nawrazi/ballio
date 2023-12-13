@@ -1,5 +1,9 @@
 package nazrawi.ballio
 
+import nazrawi.ballio.entitiy.League
+import nazrawi.ballio.entitiy.TableDto
+import nazrawi.ballio.scraper.WebScraper
+import nazrawi.ballio.service.TableService
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.web.bind.annotation.GetMapping
@@ -19,7 +23,7 @@ fun main(args: Array<String>) {
 class TableController(private val tableService: TableService) {
 
 	@GetMapping("/{id}")
-	fun getAllTeams(@PathVariable id: Int): LeagueTableDto {
+	fun getAllTeams(@PathVariable id: Int): TableDto {
 
 		var table = tableService.getTableById(id)
 
