@@ -2,7 +2,7 @@ package nazrawi.ballio
 
 import nazrawi.ballio.entitiy.League
 import nazrawi.ballio.entitiy.StandingsDto
-import nazrawi.ballio.scraper.WebScraper
+import nazrawi.ballio.scraper.StandingsScraper
 import nazrawi.ballio.service.StandingsService
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -28,7 +28,7 @@ class StandingsController(private val standingsService: StandingsService) {
 		var standings = standingsService.getStandingsById(id)
 
 		if (standings == null || standings.isOutdated)
-			standings = standingsService.updateStandings(WebScraper(League.getById(id)).scrape())
+			standings = standingsService.updateStandings(StandingsScraper(League.getById(id)).scrape())
 
 		return standings.toDto()
 	}

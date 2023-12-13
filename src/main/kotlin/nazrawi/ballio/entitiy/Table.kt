@@ -9,7 +9,7 @@ class Standings(
     var leagueId: Int,
     @OneToMany(cascade = [CascadeType.ALL], mappedBy = "leagueId")
     var teams: List<Team>,
-    var updatedAt: String = LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME),
+    private var updatedAt: String = LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME),
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0L,
 ) {
