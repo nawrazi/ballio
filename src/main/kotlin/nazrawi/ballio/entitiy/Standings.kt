@@ -13,10 +13,12 @@ class Standings(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0L,
 ) {
+    private val refreshFrequencyInHours = 1L
+
     val isOutdated: Boolean
         get() = LocalDateTime
                 .parse(updatedAt, DateTimeFormatter.ISO_DATE_TIME)
-                .isBefore(LocalDateTime.now().minusDays(1))
+                .isBefore(LocalDateTime.now().minusHours(refreshFrequencyInHours))
 
     fun toDto() = StandingsDto(
         leagueId = leagueId,
