@@ -6,31 +6,30 @@ import java.time.format.DateTimeFormatter
 
 @Entity
 class Standings(
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var leagueId: Int,
     @OneToMany(cascade = [CascadeType.ALL], mappedBy = "leagueId")
     var teams: List<Team>,
     private var updatedAt: String = LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME),
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long = 0L,
 ) {
-    private val refreshFrequencyInHours = 1L
-
     val isOutdated: Boolean
         get() = LocalDateTime
                 .parse(updatedAt, DateTimeFormatter.ISO_DATE_TIME)
-                .isBefore(LocalDateTime.now().minusHours(refreshFrequencyInHours))
+                .isBefore(LocalDateTime.now().minusHours(REFRESH_FREQUENCY_IN_HOURS))
 
     fun toDto() = StandingsDto(
         leagueId = leagueId,
         teams = teams.map { it.toDto() },
         updatedAt = updatedAt,
-        id = id,
     )
+
+    companion object {
+        const val REFRESH_FREQUENCY_IN_HOURS = 1L
+    }
 }
 
 data class StandingsDto(
     val leagueId: Int,
     val teams: List<TeamDto>,
     val updatedAt: String,
-    val id: Long,
 )
