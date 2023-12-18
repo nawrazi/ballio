@@ -15,7 +15,7 @@ class Standings(
     val isOutdated: Boolean
         get() = LocalDateTime
                 .parse(updatedAt, DateTimeFormatter.ISO_DATE_TIME)
-                .isBefore(LocalDateTime.now().minusHours(REFRESH_FREQUENCY_IN_HOURS))
+                .isBefore(LocalDateTime.now().minusHours(REFRESH_FREQUENCY_IN_HOURS.toLong()))
 
     fun toDto() = StandingsDto(
         leagueId = leagueId,
@@ -24,7 +24,7 @@ class Standings(
     )
 
     companion object {
-        const val REFRESH_FREQUENCY_IN_HOURS = 1L
+        const val REFRESH_FREQUENCY_IN_HOURS = 1
     }
 }
 
