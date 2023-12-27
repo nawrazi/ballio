@@ -8,7 +8,7 @@ enum class League(val id: Int, val sourceUri: String) {
     companion object {
         fun getBySlug(slug: String): League {
             return try {
-                valueOf(slug.split("-").joinToString("") { it.capitalize() })
+                valueOf(slug.split("-").joinToString("") { it.replaceFirstChar(Char::titlecase) })
             } catch (e: Exception) {
                 throw UnknownLeagueException()
             }
