@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head>
+        <title>Standings</title>
+    </head>
+    <body>
+        <h1 th:text="${leagueName}"></h1>
+        <ul th:each="team : ${standings.teams}">
+            <li th:text="${team.ranking + ' - ' + team.name + ' - ' + team.points}" />
+        </ul>
+    </body>
+</html>

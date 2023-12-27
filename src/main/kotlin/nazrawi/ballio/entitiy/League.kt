@@ -9,6 +9,11 @@ enum class League(val id: Int, val sourceUri: String) {
     League1(4, "ligue1football"),
     Championship(5, "championship");
 
+    val displayName get() = name
+        .replace(Regex("([a-z])([A-Z])"), "$1 $2")
+        .replace(Regex("([A-Za-z])(\\d)"), "$1 $2")
+        .replaceFirstChar { it.uppercaseChar() }
+
     companion object {
         fun getBySlug(slug: String): League {
             return try {
