@@ -1,11 +1,17 @@
 package nazrawi.ballio.entitiy
 
-enum class League(val id: Int, val slug: String, val sourceUri: String) {
-    PremierLeague(1, "premier-league", "premierleague");
+import nazrawi.ballio.exceptions.UnknownLeagueException
+
+enum class League(val id: Int, val sourceUri: String) {
+    PremierLeague(1, "premierleague");
 
     companion object {
         fun getBySlug(slug: String): League {
-            return entries.find { it.slug == slug } ?: throw Exception("Invalid League")
+            return try {
+                valueOf(slug.split("-").joinToString("") { it.capitalize() })
+            } catch (e: Exception) {
+                throw UnknownLeagueException()
+            }
         }
     }
 }
