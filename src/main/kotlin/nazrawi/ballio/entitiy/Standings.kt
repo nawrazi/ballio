@@ -6,8 +6,7 @@ import java.time.format.DateTimeFormatter
 
 @Entity
 class Standings(
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var leagueId: Int,
+    @Id var leagueId: Int,
     @OneToMany(cascade = [CascadeType.ALL], mappedBy = "leagueId")
     var teams: List<Team>,
     private var updatedAt: String = LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME),
