@@ -5,8 +5,13 @@
     </head>
     <body>
         <h1 th:text="${leagueName}"></h1>
-        <ul th:each="team : ${standings.teams}">
-            <li th:text="${team.ranking + ' - ' + team.name + ' - ' + team.points}" />
-        </ul>
+        <div th:each="team : ${standings.teams}">
+            <div style="display: flex; align-items: center; padding: 0.8rem">
+                <img th:src="${team.crest}" alt="Team crest" style="height: 26px; aspect-ratio: auto; ">
+                <span style="margin-left: 12px" th:text="${team.ranking + '.'}" />
+                <span style="margin-left: 6px" th:text="${team.name}" />
+                <span style="margin-left: 10px" th:text="${team.points}" />
+            </div>
+        </div>
     </body>
 </html>
