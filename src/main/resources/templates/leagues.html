@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Leagues</title>
+</head>
+<body>
+<div th:each="league : ${leagues}">
+    <a style="display: flex; align-items: center; padding: 0.8rem" th:href="@{'/standings/' + ${league.leagueSlug}}">
+        <span style="margin-left: 6px" th:text="${league.leagueName}" />
+    </a>
+</div>
+</body>
+</html>
