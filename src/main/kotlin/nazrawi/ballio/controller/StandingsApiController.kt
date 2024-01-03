@@ -1,6 +1,7 @@
 package nazrawi.ballio.controller
 
 import nazrawi.ballio.entitiy.League
+import nazrawi.ballio.entitiy.LeagueDto
 import nazrawi.ballio.entitiy.StandingsDto
 import nazrawi.ballio.scraper.StandingsScraper
 import nazrawi.ballio.service.StandingsService
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/api/standings")
 class StandingsApiController(private val standingsService: StandingsService) {
+
+    @GetMapping("/")
+    fun getAllStandings(): List<LeagueDto> = standingsService.getAllStandings()
 
     @GetMapping("/{slug}")
     fun getStandingsByLeagueSlug(@PathVariable slug: String): StandingsDto {

@@ -14,6 +14,15 @@ import org.springframework.web.servlet.ModelAndView
 @RequestMapping("/standings")
 class StandingsViewController(private val standingsService: StandingsService) {
 
+    @GetMapping("/")
+    fun getAllStandings(model: Model): ModelAndView {
+        model.apply {
+            addAttribute("leagues", standingsService.getAllStandings())
+        }
+
+        return ModelAndView().apply { viewName = "leagues" }
+    }
+
     @GetMapping("/{slug}")
     fun getStandingsViewByLeagueSlug(@PathVariable slug: String, model: Model): ModelAndView {
         val league = League.getBySlug(slug)
