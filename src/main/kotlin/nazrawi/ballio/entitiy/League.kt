@@ -12,7 +12,10 @@ enum class League(val id: Int, val sourceUri: String) {
     val displayName get() = name
         .replace(Regex("([a-z])([A-Z])"), "$1 $2")
         .replace(Regex("([A-Za-z])(\\d)"), "$1 $2")
-        .replaceFirstChar { it.uppercaseChar() }
+
+    val slug get() = displayName
+        .split(" ")
+        .joinToString("-") { it.replaceFirstChar(Char::lowercase) }
 
     companion object {
         fun getBySlug(slug: String): League {
@@ -24,3 +27,8 @@ enum class League(val id: Int, val sourceUri: String) {
         }
     }
 }
+
+data class LeagueDto(
+    val leagueName: String,
+    val leagueSlug: String,
+)
