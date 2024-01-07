@@ -29,6 +29,6 @@ enum class League(val id: Int, val sourceUri: String) {
 }
 
 data class LeagueDto(
-    val leagueName: String,
-    val leagueSlug: String,
+    val name: String,
+    val slug: String,
 )
